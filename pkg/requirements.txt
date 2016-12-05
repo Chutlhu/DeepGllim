@@ -1,0 +1,9 @@
+#Keras is needed with Theano  as backend.
+#Scikit-learn is also needed.
+
+#The training needs to be done on a GPU for the VGG but the EM algorithm of the
+#Gllim will be computed on your CPU.
+
+sudo pip install scikit-learn
+sudo pip install Theano
+sudo pip install keras
