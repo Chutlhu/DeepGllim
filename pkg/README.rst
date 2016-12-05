@@ -12,6 +12,9 @@ To run it on the perception cluster:
 #OAR -O /services/scratch/perception/rjuge/log/scriptCluster_%jobid%.output
 #OAR -E /services/scratch/perception/rjuge/log/scriptCluster.error
 
-THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python deep_gllim.py trainingAnnotations.txt testAnnotations.txt
+THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python
+deep_gllim.py trainingAnnotations.txt testAnnotations.txt
+
+GLLIM model implemented in python from : arXiv:1308.2302v3
 
 
