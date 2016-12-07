@@ -20,7 +20,7 @@ from keras import backend as K
 TH_WEIGHTS_PATH = 'https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg16_weights_th_dim_ordering_th_kernels.h5'
 TF_WEIGHTS_PATH = 'https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg16_weights_tf_dim_ordering_tf_kernels.h5'
 WEIGHTS_PATH  = '/services/scratch/perception/dataBiwi/vgg16_weights_init.h5'
-TH_WEIGHTS_PATH_DEEP_GLLIM = 'path/to/your_th_weights'
+TH_WEIGHTS_PATH_DEEP_GLLIM = '/services/scratch/perception/rjuge/Deep_Gllim_"+"keypoints"+"_K1_weights.hdf5'
 TF_WEIGHTS_PATH_DEEP_GLLIM = 'path/to/your_tf_weights'
 
 

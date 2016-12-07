@@ -77,7 +77,7 @@ def resp_generators(path, file_txt, gllim, batch_size):
     
     totSize = len(X_train_List)
     trainingSize = int(0.8*totSize)
-
+    
     rnk = gllim.get_rnk(path, X_train_List, Y_train_List, batch_size)
     
     genTrain = resp_generator_list(path, gllim, X_train_List[0:trainingSize], Y_train_List[0:trainingSize],

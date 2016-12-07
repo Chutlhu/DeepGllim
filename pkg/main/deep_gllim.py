@@ -23,12 +23,12 @@ HIGH_DIM = FEATURES_SIZE
 LOW_DIM = 10 #to modify according to the task
 GLLIM_K = 1
 MAX_ITER_EM = 100
-ITER = 1
+ITER = 2
 WIDTH = 224
 PB_FLAG = 'keypoints' #to modify according to the task
 
 BATCH_SIZE = 128
-NB_EPOCH = 1
+NB_EPOCH = 3
 LEARNING_RATE = 1e-01
 
 class DeepGllim:
@@ -86,7 +86,7 @@ class DeepGllim:
             
             # Fine-tunning
             prec = 1/self.gllim.SigmakSquareList[0] 
-            DeepGllim.fine_tune(self, 26, prec*learning_rate, f)
+            DeepGllim.fine_tune(self, 26, learning_rate, f)
     
         features_training, target_training = extract_XY_generator(self.network, generator_training, n_train)
         
@@ -189,21 +189,21 @@ if __name__ == '__main__':
     test_txt = sys.argv[2]
 
     (gen_training, N_train), (gen_test, N_test) = load_data_generator(ROOTPATH, train_txt, test_txt, gllim=None, FT=False)
-
+    
     deep_gllim.fit((gen_training, N_train),
                    learning_rate=LEARNING_RATE,
                    it=ITER, f=train_txt)
 
     #predictions = deep_gllim.predict((gen_test, N_test))
     
-    predictions_train = deep_gllim.predict((gen_training, N_train))
-    for x,y in gen_training:
-        show_keypoints(x, y, predictions_train)
-        break
+    # predictions_train = deep_gllim.predict((gen_training, N_train))
+    # for x,y in gen_training:
+    #     show_keypoints(x, y, predictions_train)
+    #     break
     
-    predictions_test = deep_gllim.predict((gen_test, N_test))
-    for x,y in gen_test:
-        show_keypoints(x, y, predictions_test)
-        break
+    # predictions_test = deep_gllim.predict((gen_test, N_test))
+    # for x,y in gen_test:
+    #     show_keypoints(x, y, predictions_test)
+    #     break
     
     deep_gllim.evaluate((gen_test, N_test), WIDTH, PB_FLAG)
