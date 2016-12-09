@@ -16,7 +16,7 @@ from plot_keypoints import show_keypoints
 from PCA_init import add_pca_layer
 np.set_printoptions(threshold=np.nan)
 
-ROOTPATH = '/services/scratch/perception/dataCVPR13/VGG_train/'
+ROOTPATH ='/path/to/data'
 
 FEATURES_SIZE = 512
 HIGH_DIM = FEATURES_SIZE
@@ -194,16 +194,6 @@ if __name__ == '__main__':
                    learning_rate=LEARNING_RATE,
                    it=ITER, f=train_txt)
 
-    #predictions = deep_gllim.predict((gen_test, N_test))
-    
-    # predictions_train = deep_gllim.predict((gen_training, N_train))
-    # for x,y in gen_training:
-    #     show_keypoints(x, y, predictions_train)
-    #     break
-    
-    # predictions_test = deep_gllim.predict((gen_test, N_test))
-    # for x,y in gen_test:
-    #     show_keypoints(x, y, predictions_test)
-    #     break
+    predictions = deep_gllim.predict((gen_test, N_test))
     
     deep_gllim.evaluate((gen_test, N_test), WIDTH, PB_FLAG)
