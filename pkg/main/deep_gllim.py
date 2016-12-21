@@ -86,7 +86,7 @@ class DeepGllim:
             
             # Fine-tunning
             prec = 1/self.gllim.SigmakSquareList[0] 
-            DeepGllim.fine_tune(self, 26, learning_rate, f)
+            DeepGllim.fine_tune(self, 26, prec*learning_rate, f)
     
         features_training, target_training = extract_XY_generator(self.network, generator_training, n_train)
         
