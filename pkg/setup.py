@@ -15,9 +15,9 @@ setup(
     description='Deep Gllim package',
     long_description=readme,
     author='Rémi Juge',
-    author_email='remi.juge@inria.fr',
+    author_email='remi.juge@supelec.fr',
     url='https://github.com/rjuge/',
     license=license,
-    packages=find_packages(exclude=('tests', 'docs'))
-)
+    install_requires=['numpy','scipy','Theano','keras'],
+    packages=find_packages())
 
