@@ -18,18 +18,20 @@ np.set_printoptions(threshold=np.nan)
 
 ROOTPATH ='/path/to/data'
 
-FEATURES_SIZE = 512
-HIGH_DIM = FEATURES_SIZE
-LOW_DIM = 10 #to modify according to the task
-GLLIM_K = 1
-MAX_ITER_EM = 100
-ITER = 2
-WIDTH = 224
-PB_FLAG = 'keypoints' #to modify according to the task
+FEATURES_SIZE = 512 #PCA dimension
+HIGH_DIM = FEATURES_SIZE #dimension size of data input of Gllim
+LOW_DIM = 10 #dimension size of the output (regressors)
+GLLIM_K = 2 #number of regressions
+MAX_ITER_EM = 100 #max iter number of the EM algorithme
+ITER = 2 #number of iteration alterning between backprop and EM
+WIDTH = 224 #input size
+PB_FLAG = 'pose' #to modify according to the task
 
-BATCH_SIZE = 128
-NB_EPOCH = 3
-LEARNING_RATE = 1e-01
+BATCH_SIZE = 128 #GPU batch size
+NB_EPOCH = 10 #number of epochs training the network
+LEARNING_RATE = 1e-01 #learning rate init
+
+CHECKPOINT_PATH = 'path/to/checkpoint'
 
 class DeepGllim:
     ''' Class of deep gllim model'''
@@ -46,17 +48,9 @@ class DeepGllim:
             learning_rate=0.1, it=2, f=sys.argv[1]):
         '''Trains the model for a fixed number of epochs and iterations.
            # Arguments
-                X_train: input data, as a Numpy array or list of Numpy arrays
-                    (if the model has multiple inputs).
-                Y_train : labels, as a Numpy array.
-                batch_size: integer. Number of samples per gradient update.
-                learning_rate: float, learning rate
-                nb_epoch: integer, the number of epochs to train the model.
-                validation_split: float (0. < x < 1).
-                    Fraction of the data to use as held-out validation data.
-                validation_data: tuple (x_val, y_val) or tuple
-                    (x_val, y_val, val_sample_weights) to be used as held-out
-                    validation data. Will override validation_split.
+		generator_training: generator, yields the inputs
+		n_train: int, number of training samples
+		learning_rate: float, learning rate
                 it: integer, number of iterations of the algorithm
                 f: text file for responsability trick
                 
@@ -122,7 +116,7 @@ class DeepGllim:
         self.network.summary()
 
 
-        checkpointer = ModelCheckpoint(filepath="/services/scratch/perception/rjuge/Deep_Gllim_"+PB_FLAG+"_K"+str(GLLIM_K)+"_weights.hdf5",
+        checkpointer = ModelCheckpoint(filepath=CHECKPOINT_PATH,
                                        monitor='val_loss',
                                        verbose=1,
                                        save_weights_only=True,
@@ -144,7 +138,7 @@ class DeepGllim:
                                    validation_data=generator_val,
                                    nb_val_samples=N_VAL)
 
-        self.network.load_weights("/services/scratch/perception/rjuge/Deep_Gllim_"+PB_FLAG+"_K"+str(GLLIM_K)+"_weights.hdf5")
+        self.network.load_weights(CHECKPOINT_PATH)
 
         return self.network
 
