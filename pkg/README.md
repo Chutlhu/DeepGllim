@@ -1,4 +1,6 @@
 # Deep Gllim
+Perform deep regression by training jointly a CNN (feature extraction) and a Gllim model (inverse regression).
+![EM](https://team.inria.fr/perception/files/2017/04/EM.png)
 
 ## Installation
 `python setup.py install`
